@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Favorite Person ❤️</title>
+    <title>Para Mi Persona Favorita ❤️</title>
     <style>
         :root {
             --primary-pink: #ff6b81;
@@ -48,13 +48,52 @@
             margin-bottom: 25px;
         }
 
-        .couple-photo {
-            width: 100%;
-            max-height: 350px;
-            object-fit: cover;
-            border-radius: 15px;
+        /* Contenedor del Carrusel de Fotos */
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
             margin-bottom: 25px;
+            border-radius: 15px;
+            overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 350px;
+        }
+
+        .mySlides {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Flechas de navegación */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+
+        .prev { left: 0; border-radius: 3px 0 0 3px; }
+        .next { right: 0; border-radius: 3px 0 0 3px; }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
         }
 
         .button-group {
@@ -129,27 +168,77 @@
 <body>
 
     <div class="container">
-        <h1>Hey Beautiful... ❤️</h1>
-        <p class="subtitle">Click the buttons below for a small surprise.</p>
+        <h1>¡Hola Hermosa! ❤️</h1>
+        <p class="subtitle">Presiona los botones de abajo para ver una sorpresa.</p>
 
-        <!-- PHOTO COMPONENT: Make sure your image file is named "foto.jpg" and uploaded to your GitHub repository -->
-        <img src="foto.jpg" alt="Us" class="couple-photo" onerror="this.src='https://unsplash.com';">
+        <!-- CARRUSEL DE FOTOS: Sube tus archivos llamados foto1.jpg, foto2.jpg y foto3.jpg a GitHub -->
+        <div class="slideshow-container">
+            <!-- Primera Foto -->
+            <div class="mySlides">
+                <img src="foto1.jpg" onerror="this.src='https://unsplash.com';">
+            </div>
+
+            <!-- Segunda Foto -->
+            <div class="mySlides">
+                <img src="foto2.jpg" onerror="this.src='https://unsplash.com';">
+            </div>
+
+            <!-- Tercera Foto -->
+            <div class="mySlides">
+                <img src="foto3.jpg" onerror="this.src='https://unsplash.com';">
+            </div>
+
+            <!-- Flechas manuales -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
 
         <div class="button-group">
-            <button onclick="showReason()">✨ Reasons Why I Love You</button>
-            <button onclick="showMessage('memory')">📸 A Special Memory</button>
-            <button onclick="showMap()">📍 Where It All Began</button>
+            <button onclick="showReason()">✨ Razones Por Las Que Te Amo</button>
+            <button onclick="showMessage('memory')">📸 Un Lindo Recuerdo</button>
+            <button onclick="showMap()">📍 Donde Todo Comenzó</button>
         </div>
 
         <div class="display-area" id="displayArea">
-            <p class="message" style="color: #a4b0be;">Your message will appear here...</p>
+            <p class="message" style="color: #a4b0be;">Tu mensaje aparecerá aquí...</p>
         </div>
     </div>
 
     <script>
         const displayArea = document.getElementById('displayArea');
 
-        // All 108 of your provided reasons loaded into the array
+        // Lógica del carrusel automático
+        let slideIndex = 0;
+        showSlides();
+
+        function plusSlides(n) {
+            showSlidesManual(slideIndex += n);
+        }
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 4000); 
+        }
+
+        function showSlidesManual(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slides[slideIndex-1].style.display = "block";  
+        }
+
+        // Tu lista de razones en inglés
         const reasons = [
             "Because you showed me a kind of love that changed me.",
             "Because your heart is one of the most beautiful things I’ve ever known.",
@@ -192,45 +281,3 @@
             "Because your forgiveness was never something I should have expected.",
             "Because your love was never something I should have taken lightly.",
             "Because you’ve helped shape the person I want to become.",
-            "Because your happiness still matters to me.",
-            "Because your peace matters to me.",
-            "Because your heart matters to me.",
-            "Because I admire who you are when no one else is looking.",
-            "Because your character speaks louder than your words.",
-            "Because you choose kindness even when you’re hurting.",
-            "Because you care about others without expecting anything in return.",
-            "Because your heart is gentle.",
-            "Because your love is genuine.",
-            "Because you’ve made my life better simply by being in it.",
-            "Because you make me want to grow instead of staying the same.",
-            "Because loving you has shown me where I need to change.",
-            "Because you’ve made me realize that love isn’t just a feeling—it’s consistency.",
-            "Because you’ve taught me that trust is earned every day.",
-            "Because you’ve shown me that apologies only matter when they’re followed by change.",
-            "Because you’ve made me understand that love without effort isn’t enough.",
-            "Because you’ve helped me see the man I want to become.",
-            "Because you’ve helped me understand the consequences of my actions.",
-            "Because your honesty has helped me grow.",
-            "Because you’ve never asked me to be perfect.",
-            "Because you only wanted me to keep choosing us.",
-            "Because I admire the way you love.",
-            "Because I admire the way you care.",
-            "Because I admire your resilience.",
-            "Because you’ve never stopped being yourself.",
-            "Because your heart deserves to be protected.",
-            "Because your trust deserves to be earned.",
-            "Because your love deserves to be cherished.",
-            "Because you’ve always deserved better from me.",
-            "Because you’ve reminded me that love is built one decision at a time.",
-            "Because you’ve taught me that small choices matter.",
-            "Because you’ve shown me that broken trust hurts more than broken promises.",
-            "Because you’ve taught the value of accountability.",
-            "Because you’ve made me realize that real love requires growth.",
-            "Because you’ve given me reasons to become better, not just say I will.",
-            "Because I still see the incredible person I fell in love with.",
-            "Because I still believe in everything that makes you who you are.",
-            "Because I still admire your heart.",
-            "Because I still admire your strength.",
-            "Because I still admire your courage.",
-            "Because I still admire your kindness.",
-            "Because I still admire your honesty.",
