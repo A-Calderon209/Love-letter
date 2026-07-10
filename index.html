@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Persona Favorita ❤️</title>
+    <title>For My Favorite Person ❤️</title>
     <style>
         :root {
             --primary-pink: #ff6b81;
@@ -33,18 +33,28 @@
             box-shadow: 0 10px 30px rgba(255, 107, 129, 0.15);
             text-align: center;
             margin-top: 40px;
+            box-sizing: border-box;
         }
 
         h1 {
             color: var(--dark-pink);
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             margin-bottom: 10px;
         }
 
         .subtitle {
             font-style: italic;
             color: #747d8c;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+        }
+
+        .couple-photo {
+            width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .button-group {
@@ -89,7 +99,7 @@
         }
 
         .message {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             line-height: 1.6;
             color: var(--text-color);
             animation: fadeIn 0.5s ease forwards;
@@ -119,13 +129,16 @@
 <body>
 
     <div class="container">
-        <h1>Hola Hermosa!, Q tengas lindo dia! ❤️</h1>
-        <p class="subtitle">Presiona los butones para algunas sorpresitas 💕.</p>
+        <h1>Hey Beautiful... ❤️</h1>
+        <p class="subtitle">Click the buttons below for a small surprise.</p>
+
+        <!-- PHOTO COMPONENT: Make sure your image file is named "foto.jpg" and uploaded to your GitHub repository -->
+        <img src="foto.jpg" alt="Us" class="couple-photo" onerror="this.src='https://unsplash.com';">
 
         <div class="button-group">
-            <button onclick="showMessage('reason')">✨ Reason #1 Why I Love You</button>
-            <button onclick="showMessage('memory')">📸 Un recuredo  Lindo </button>
-            <button onclick="showMap()">📍 Donde Todo Empezo 🩷</button>
+            <button onclick="showReason()">✨ Reasons Why I Love You</button>
+            <button onclick="showMessage('memory')">📸 A Special Memory</button>
+            <button onclick="showMap()">📍 Where It All Began</button>
         </div>
 
         <div class="display-area" id="displayArea">
@@ -136,35 +149,88 @@
     <script>
         const displayArea = document.getElementById('displayArea');
 
-        function showMessage(type) {
-            let content = '';
-            
-            if (type === 'reason') {
-                content = `<p class="message"><strong>Reason #1:</strong> I love the way your eyes light up whenever you talk about the things you are genuinely passionate about. You inspire me daily!</p>`;
-            } else if (type === 'memory') {
-                content = `<p class="message"><strong>Our best memory:</strong> I still smile thinking about the time we got caught in the sudden downpour and ended up eating cold pizza under that tiny awning. I'd ruin any jacket for you.</p>`;
-            }
-            
-            displayArea.innerHTML = content;
-        }
-
-        function showMap() {
-            // HOW TO REMIX THE MAP: 
-            // 1. Go to Google Maps -> Search your first date spot.
-            // 2. Click "Share" -> Select the "Embed a map" tab.
-            // 3. Copy the URL inside the `src="..."` attribute and replace the URL below.
-            
-            const mapHtml = `
-                <div class="message" style="width: 100%;">
-                    <p style="margin-top: 0; margin-bottom: 10px;"><strong>Our First Date Location:</strong></p>
-                    <div class="map-container">
-                        <iframe src="https://google.com" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-            `;
-            displayArea.innerHTML = mapHtml;
-        }
-    </script>
-
-</body>
-</html>
+        // All 108 of your provided reasons loaded into the array
+        const reasons = [
+            "Because you showed me a kind of love that changed me.",
+            "Because your heart is one of the most beautiful things I’ve ever known.",
+            "Because you always cared deeply, even when it wasn’t easy.",
+            "Because you taught me that love is found in the little things.",
+            "Because your smile has always been able to brighten my darkest days.",
+            "Because you have a kindness that this world needs more of.",
+            "Because you make people feel seen and valued.",
+            "Because your compassion is something I will always admire.",
+            "Because you inspire me to become a better man.",
+            "Because you never stopped loving with your whole heart.",
+            "Because you believe in the people you care about.",
+            "Because you love with honesty instead of convenience.",
+            "Because you’ve taught me lessons I’ll carry forever.",
+            "Because your strength amazes me every day.",
+            "Because you’ve never been afraid to speak the truth.",
+            "Because you have a beautiful soul.",
+            "Because you care so deeply that even your hurt comes from love.",
+            "Because you never asked for perfection, only honesty and effort.",
+            "Because you deserved consistency.",
+            "Because you deserved to feel safe with me.",
+            "Because you deserved to be chosen every day.",
+            "Because you deserved actions that matched my words.",
+            "Because you’ve always been worth fighting for.",
+            "Because you’ve always been worth changing for.",
+            "Because you’ve shown me what genuine love looks like.",
+            "Because you made me realize how precious trust really is.",
+            "Because losing your trust showed me what I should have protected.",
+            "Because you make ordinary moments unforgettable.",
+            "Because every memory with you means more to me than I can explain.",
+            "Because every laugh we shared became part of me.",
+            "Because every hug reminded me where I wanted to be.",
+            "Because every conversation with you mattered.",
+            "Because even our silence meant something.",
+            "Because you accepted me at my worst.",
+            "Because you believed in me when I didn’t deserve it.",
+            "Because you saw the good in me even when I struggled to see it myself.",
+            "Because you gave me chances I should have valued more.",
+            "Because your patience was a gift.",
+            "Because your forgiveness was never something I should have expected.",
+            "Because your love was never something I should have taken lightly.",
+            "Because you’ve helped shape the person I want to become.",
+            "Because your happiness still matters to me.",
+            "Because your peace matters to me.",
+            "Because your heart matters to me.",
+            "Because I admire who you are when no one else is looking.",
+            "Because your character speaks louder than your words.",
+            "Because you choose kindness even when you’re hurting.",
+            "Because you care about others without expecting anything in return.",
+            "Because your heart is gentle.",
+            "Because your love is genuine.",
+            "Because you’ve made my life better simply by being in it.",
+            "Because you make me want to grow instead of staying the same.",
+            "Because loving you has shown me where I need to change.",
+            "Because you’ve made me realize that love isn’t just a feeling—it’s consistency.",
+            "Because you’ve taught me that trust is earned every day.",
+            "Because you’ve shown me that apologies only matter when they’re followed by change.",
+            "Because you’ve made me understand that love without effort isn’t enough.",
+            "Because you’ve helped me see the man I want to become.",
+            "Because you’ve helped me understand the consequences of my actions.",
+            "Because your honesty has helped me grow.",
+            "Because you’ve never asked me to be perfect.",
+            "Because you only wanted me to keep choosing us.",
+            "Because I admire the way you love.",
+            "Because I admire the way you care.",
+            "Because I admire your resilience.",
+            "Because you’ve never stopped being yourself.",
+            "Because your heart deserves to be protected.",
+            "Because your trust deserves to be earned.",
+            "Because your love deserves to be cherished.",
+            "Because you’ve always deserved better from me.",
+            "Because you’ve reminded me that love is built one decision at a time.",
+            "Because you’ve taught me that small choices matter.",
+            "Because you’ve shown me that broken trust hurts more than broken promises.",
+            "Because you’ve taught the value of accountability.",
+            "Because you’ve made me realize that real love requires growth.",
+            "Because you’ve given me reasons to become better, not just say I will.",
+            "Because I still see the incredible person I fell in love with.",
+            "Because I still believe in everything that makes you who you are.",
+            "Because I still admire your heart.",
+            "Because I still admire your strength.",
+            "Because I still admire your courage.",
+            "Because I still admire your kindness.",
+            "Because I still admire your honesty.",
